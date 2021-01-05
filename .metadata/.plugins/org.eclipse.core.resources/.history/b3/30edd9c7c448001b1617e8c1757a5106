@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- namespce에서 mvc기능 추가 -->
+	<!-- web.xml에 설정파일로 추가. -->
+	
+	<!-- 인터셉터클래스를 bean으로 생성 -->
+	<bean id="userAuthHandler" class="com.team404.common.util.interceptor.UserAuthHandler" />
+	<bean id="boardAuthHandler" class="com.team404.common.util.interceptor.BoardAuthHandler"/>
+	
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/user/userMypage"/> <!-- 마이페이지화면 -->
+			<mvc:mapping path="/freeBoard/freeRegist"/> <!-- 글등록화면 -->
+			<ref bean="userAuthHandler"/> <!-- 위에서 만든 userAuthHandler가 동작  -->			
+		</mvc:interceptor>
+		
+		<mvc:interceptor>
+			<mvc:mapping path="/freeBoard/freeModify"/>
+			<mvc:mapping path="/freeBoard/freeUpdate"/>
+			<mvc:mapping path="/freeBoard/freeDelete"/>
+			<ref bean="boardAuthHandler"/>
+		</mvc:interceptor>
+		
+	</mvc:interceptors>
+	
+	
+</beans>

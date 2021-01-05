@@ -1,0 +1,21 @@
+package com.simple.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+@RequestMapping("/fileupload")
+public class UploadController {
+	
+	//화면처리
+	@RequestMapping("/upload")
+	public String upload() {
+		return "fileupload/upload";
+	}
+	
+	@RequestMapping("/upload_ok")
+	public String upload_ok(@RequestMapping("file") ) {
+		
+	}
+}
